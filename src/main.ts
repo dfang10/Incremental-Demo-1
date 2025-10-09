@@ -16,7 +16,7 @@ document.body.style.textAlign = "center";
 document.body.style.marginTop = "0px";
 document.body.appendChild(potato);
 
-function autoClick() { 
+function autoClick() {
   counter++;
   counterElement.textContent = `Fries 🍟: ${counter}`;
 }
@@ -26,7 +26,7 @@ function buyClick() {
     counter -= costClicker;
     setInterval(autoClick, 1000);
     costClicker += 1;
-    clicker.textContent = `Buy auto clicker: ${costClicker}🍟`; 
+    clicker.textContent = `Buy auto clicker: ${costClicker}🍟`;
   }
 }
 
