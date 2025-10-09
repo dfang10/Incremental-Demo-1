@@ -1,7 +1,7 @@
 import "./style.css";
 
 let counter: number = 0;
-let cost1: number = 10;
+let costClicker: number = 10;
 
 // button
 const potato = document.createElement("div");
@@ -16,29 +16,27 @@ document.body.style.textAlign = "center";
 document.body.style.marginTop = "0px";
 document.body.appendChild(potato);
 
-
-function autoClick() { // Make potato amoutn add every 1 second and appear
+function autoClick() { 
   counter++;
   counterElement.textContent = `Fries 🍟: ${counter}`;
 }
 
 function buyClick() {
-  if (counter >= cost1) {
-    counter -= cost1;
+  if (counter >= costClicker) {
+    counter -= costClicker;
     setInterval(autoClick, 1000);
-    cost1 += Math.floor(cost1 / 3);
-    console.log(cost1);
+    costClicker += 1;
+    clicker.textContent = `Buy auto clicker: ${costClicker}🍟`; 
   }
-
 }
 
 // clicker button
 const clicker = document.createElement("l");
 clicker.className = "clicker";
-clicker.textContent = "Buy auto clicker";
 clicker.style.position = "absolute";
 clicker.style.cursor = "pointer";
 clicker.style.fontSize = "24px";
+clicker.textContent = `Buy auto clicker: ${costClicker}🍟`;
 
 clicker.style.textAlign = "center";
 clicker.style.marginTop = "275px";
@@ -77,7 +75,11 @@ potato.addEventListener("click", () => {
 clicker.addEventListener("click", () => {
   buyClick();
 
-})
+  clicker.style.transform = "scale(0.8)";
+  setTimeout(() => {
+    clicker.style.transform = "scale(1)";
+  }, 100);
+});
 
 // Function to create a sparkle particle
 function createSparkle() {
