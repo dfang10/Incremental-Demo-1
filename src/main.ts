@@ -88,7 +88,14 @@ function updateButtons() {
   clicker.disabled = counter < costClicker;
   clicker2.disabled = counter < (costClicker * 2);
 }
-// Continuous growth (used brace)
+
+// setInterval growth
+//setInterval(() => {
+//  counter += clickerCount; // Each clicker gives +1
+//  counterElement.textContent = `Fries 🍟: ${counter}`;
+//}, 1000);
+
+// Continuous growth (used brace) requestAnimationFrame growth
 let lastTime = performance.now();
 function gameLoop(currentTime: number) {
   const deltaSec = (currentTime - lastTime) / 1000; // seconds passed
