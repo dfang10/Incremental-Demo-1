@@ -1,48 +1,58 @@
-name: CI
+{
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
-jobs:
-  lint-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  "name": "Deno Development Environment",
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip curl
 
-      - name: Setup Lua and LuaRocks
-        uses: leafo/setup-lua@v8
-        with:
-          lua-version: '5.4'
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 
-      - name: Install LuaRocks packages
-        run: |
-          luarocks install luacheck
-          luarocks install busted
 
-      - name: Install stylua
-        run: |
-          curl -L -o stylua.tar.gz https://github.com/JohnnyMorganz/StyLua/releases/download/v0.12.1/stylua-x86_64-unknown-linux-gnu.tar.gz
-          tar -xzf stylua.tar.gz
-          sudo mv stylua /usr/local/bin/stylua || sudo mv stylua /usr/bin/stylua
+  "features": {
 
-      - name: Check formatting (stylua)
-        run: stylua --check .
 
-      - name: Run luacheck
-        run: luacheck . --config .luacheckrc
+    "ghcr.io/devcontainers-extra/features/deno": {
 
-      - name: Run tests (busted)
-        run: |
-          if [ -d "spec" ]; then
-            busted -v
-          else
-            echo "No spec/ directory found — skipping busted"
-          fi
+
+      "version": "latest"
+
+
+    }
+
+
+  },
+
+
+  "forwardPorts": [5173],
+
+
+  "postCreateCommand": "deno --version",
+
+
+  "postStartCommand": "chmod +x ./setup-hooks.sh && ./setup-hooks.sh",
+
+
+  "customizations": {
+
+
+    "vscode": {
+
+
+      "extensions": [
+
+
+        "denoland.vscode-deno",
+
+
+        "davidanson.vscode-markdownlint"
+
+
+      ]
+
+
+    }
+
+
+  }
+
+
+}
